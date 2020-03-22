@@ -16,6 +16,7 @@ struct APIKeys {
         static let SEARCH = "search/artist?q="
         static let ARTIST = "artist/"
         static let ALBUM = "album/"
+        static let ARTIST_ALBUMS = "/albums?index="
     }
     
 }

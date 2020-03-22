@@ -38,6 +38,7 @@ struct ArtistDataSet: Codable, Hashable  {
     let artists: [Artist]?
     let total: Int?
     let next: String?
+    
     enum CodingKeys: String, CodingKey {
         case total, next
         case artists = "data"

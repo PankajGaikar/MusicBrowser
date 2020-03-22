@@ -23,4 +23,13 @@ class APIManager {
             .eraseToAnyPublisher()
     }
     
+    //MARK:- Artist Albums
+    func retrieveAlbumsFor(artistID: String, index: Int) -> AnyPublisher<AlbumDataSet, Error> {
+           
+        let uri = URL(string: APIKeys.BASE_URI + APIKeys.EndPoints.ARTIST + artistID + APIKeys.EndPoints.ARTIST_ALBUMS + String(index))
+           return APIService.shared.connectAPI(uri!)
+               .map(\.value)
+               .eraseToAnyPublisher()
+       }
+    
 }

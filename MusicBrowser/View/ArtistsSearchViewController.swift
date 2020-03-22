@@ -108,9 +108,7 @@ extension ArtistsSearchViewController: UITableViewDelegate {
             return
         }
 
-        print("Artist = \(artist.name ?? "EMPTY?")")
         //Show albums screen
-        
         let artistAlbumsViewController = (self.storyboard?.instantiateViewController(identifier: "ArtistAlbumsViewController")) as! ArtistAlbumsViewController
         artistAlbumsViewController.artist = artist
         self.navigationController?.pushViewController(artistAlbumsViewController, animated: true)        
