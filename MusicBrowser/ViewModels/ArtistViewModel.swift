@@ -17,6 +17,11 @@ class ArtistViewModel {
 
     func retrieveSearchResults(_ artist: String) {
         
+        if artist.count == 0 {
+            //Empty search query, empty results
+            self.artistData.send([Artist]())
+        }
+        
         let _ = APIManager.shared.retrieveSearchResults(artist: artist)
             .receive(on: RunLoop.main)
             .sink(receiveCompletion: { (_) in
