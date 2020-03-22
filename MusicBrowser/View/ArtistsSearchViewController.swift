@@ -102,12 +102,18 @@ extension ArtistsSearchViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+        //Deselect the row.
+        tableView.deselectRow(at: indexPath, animated: true)
         guard let artist = dataSource.itemIdentifier(for: indexPath) else {
             return
         }
 
+        print("Artist = \(artist.name ?? "EMPTY?")")
         //Show albums screen
+        
+        let artistAlbumsViewController = (self.storyboard?.instantiateViewController(identifier: "ArtistAlbumsViewController")) as! ArtistAlbumsViewController
+        artistAlbumsViewController.artist = artist
+        self.navigationController?.pushViewController(artistAlbumsViewController, animated: true)        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

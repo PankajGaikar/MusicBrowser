@@ -7,7 +7,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Artists Catalogue-->
+        <!--Artists Search View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ArtistsSearchViewController" customModule="MusicBrowser" customModuleProvider="target" sceneMemberID="viewController">
@@ -65,7 +65,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Artists Catalogue" id="j3h-6Y-3tF"/>
+                    <navigationItem key="navigationItem" id="j3h-6Y-3tF"/>
                     <connections>
                         <outlet property="tableView" destination="o6X-zA-gdk" id="TqD-qZ-Z6h"/>
                     </connections>
@@ -74,10 +74,10 @@
             </objects>
             <point key="canvasLocation" x="1047.8260869565217" y="112.5"/>
         </scene>
-        <!--Artist Albums View Controller-->
+        <!--Artist Albums-->
         <scene sceneID="VfD-dy-Lz7">
             <objects>
-                <viewController id="kmQ-mX-FXv" customClass="ArtistAlbumsViewController" customModule="MusicBrowser" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ArtistAlbumsViewController" title="Artist Albums" id="kmQ-mX-FXv" customClass="ArtistAlbumsViewController" customModule="MusicBrowser" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1Zw-eM-nPg">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
