@@ -11,18 +11,27 @@ import Combine
 
 class ArtistsSearchViewController: UIViewController {
 
+    //Tableview instance linked from storyboard
     @IBOutlet weak var tableView: UITableView!
+    
+    //Searchbar to be added to navigation bar
     lazy var searchBar = UISearchBar(frame: CGRect.zero)
 
+    //View Model responsible for populating data
     private var artistViewModel = ArtistViewModel()
+    
+    //Add subscriptions of combine request to make sure they execute.
+    //Not having this will actually cancel the URIRequest
     var subscription = Set<AnyCancellable>()
 
+    //Use Diffable datasource with section.
     fileprivate enum Section: CaseIterable {
         case main
     }
     
     fileprivate var dataSource: UITableViewDiffableDataSource<Section, Artist>!
     
+    //MARK:- Lifecycle methods.
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -37,12 +46,12 @@ class ArtistsSearchViewController: UIViewController {
                 guard let `self` = self else {
                     return
                 }
-                print("Incoming data")
                 self.createSnapshot(artist)
         }
         .store(in: &subscription)
     }
 
+    //MARK:- Setup UI
     fileprivate func setupSearchBar() {
         searchBar.placeholder = "Search"
         searchBar.searchTextField.clearButtonMode = .always
@@ -57,6 +66,7 @@ class ArtistsSearchViewController: UIViewController {
 
 }
 
+//MARK:- SearchBar delegate
 extension ArtistsSearchViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         artistViewModel.retrieveSearchResults(searchText)
@@ -76,6 +86,7 @@ extension ArtistsSearchViewController: UITableViewDelegate {
             
             if let cell = self.tableView.dequeueReusableCell(withIdentifier: "ArtistTableViewCell", for: indexPath) as? ArtistTableViewCell {
                 cell.titleLabel?.text = artist.name
+                cell.iconImageView.loadImageWithUrl(artist.picture ?? artist.pictureBig ?? artist.pictureMedium ?? "") //Try three URIs before giving up.
                 return cell
             }
             
@@ -100,7 +111,7 @@ extension ArtistsSearchViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 64
+        return 64 //Hardcode? Dynamic would be great here I believe.
     }
 }
 

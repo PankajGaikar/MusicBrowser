@@ -11,8 +11,10 @@ import Combine
 
 class APIManager {
     
+    //MARK:- Shared instance
     static let shared = APIManager()
 
+    //MARK:- Search Results
     func retrieveSearchResults(artist: String) -> AnyPublisher<ArtistDataSet, Error> {
         
         let uri = URL(string: APIKeys.BASE_URI + APIKeys.EndPoints.SEARCH + artist)

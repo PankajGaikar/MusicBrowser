@@ -31,6 +31,8 @@ class APIService {
                 print("status code for server response : \((result.response as? HTTPURLResponse)?.statusCode ?? 200)")
                 throw APIFailureCondition.invalidServerResponse
             }
+              
+            //Catch exceptions just to make sure parsing errors also communicated on UI.
             do {
                 let decoder = JSONDecoder()
                 let value = try decoder.decode(T.self, from: result.data)
@@ -45,3 +47,4 @@ class APIService {
     }
     
 }
+
