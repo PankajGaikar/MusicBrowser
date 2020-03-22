@@ -10,11 +10,20 @@ import UIKit
 
 class ArtistsSearchViewController: UIViewController {
 
+    lazy var searchBar = UISearchBar(frame: CGRect.zero)
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        //Setup searchbar
+        setupSearchBar()
     }
 
+    fileprivate func setupSearchBar() {
+        searchBar.placeholder = "Search"
+        searchBar.searchTextField.clearButtonMode = .always
+        navigationItem.titleView = searchBar
+    }
 
 }
 
