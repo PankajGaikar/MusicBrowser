@@ -18,6 +18,42 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="o6X-zA-gdk">
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ArtistTableViewCell" rowHeight="75" id="hai-CZ-oe8" customClass="ArtistTableViewCell" customModule="MusicBrowser" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="75"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="hai-CZ-oe8" id="gYJ-fJ-8Ib">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="75"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Aa3-QN-AG6">
+                                                    <rect key="frame" x="5" y="5" width="65" height="65"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="Aa3-QN-AG6" secondAttribute="height" multiplier="1:1" id="d2U-8F-RS8"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Artist Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="102-20-uiO">
+                                                    <rect key="frame" x="78" y="27" width="308" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="Aa3-QN-AG6" secondAttribute="bottom" constant="5" id="FEv-ai-ot0"/>
+                                                <constraint firstItem="102-20-uiO" firstAttribute="centerY" secondItem="Aa3-QN-AG6" secondAttribute="centerY" id="Ged-i8-Vl1"/>
+                                                <constraint firstItem="Aa3-QN-AG6" firstAttribute="top" secondItem="gYJ-fJ-8Ib" secondAttribute="top" constant="5" id="Kdp-WZ-l4B"/>
+                                                <constraint firstItem="Aa3-QN-AG6" firstAttribute="leading" secondItem="gYJ-fJ-8Ib" secondAttribute="leading" constant="5" id="crX-Hf-KU5"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="102-20-uiO" secondAttribute="trailing" constant="8" id="lkI-hA-3u6"/>
+                                                <constraint firstItem="102-20-uiO" firstAttribute="leading" secondItem="Aa3-QN-AG6" secondAttribute="trailing" constant="8" id="t2d-cV-j1B"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="iconImageView" destination="Aa3-QN-AG6" id="C55-Op-ONc"/>
+                                            <outlet property="titleLabel" destination="102-20-uiO" id="dfk-12-5tb"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -30,6 +66,9 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" title="Artists Catalogue" id="j3h-6Y-3tF"/>
+                    <connections>
+                        <outlet property="tableView" destination="o6X-zA-gdk" id="TqD-qZ-Z6h"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
