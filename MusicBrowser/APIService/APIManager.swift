@@ -17,7 +17,8 @@ class APIManager {
     //MARK:- Search Results
     func retrieveSearchResults(artist: String) -> AnyPublisher<ArtistDataSet, Error> {
         
-        let uri = URL(string: APIKeys.BASE_URI + APIKeys.EndPoints.SEARCH + artist)
+        let uriString = APIKeys.BASE_URI + APIKeys.EndPoints.SEARCH + artist
+        let uri = URL(string: uriString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)
         return APIService.shared.connectAPI(uri!)
             .map(\.value)
             .eraseToAnyPublisher()
