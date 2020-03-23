@@ -149,7 +149,7 @@
         <!--Album Details View Controller-->
         <scene sceneID="Iwv-aI-W2W">
             <objects>
-                <viewController id="HtT-Rz-6ut" customClass="AlbumDetailsViewController" customModule="MusicBrowser" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AlbumDetailsViewController" id="HtT-Rz-6ut" customClass="AlbumDetailsViewController" customModule="MusicBrowser" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="0L3-gh-d95">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

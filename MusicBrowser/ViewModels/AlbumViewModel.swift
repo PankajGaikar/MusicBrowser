@@ -17,9 +17,7 @@ class AlbumViewModel {
     var shouldFetchMoreData = true
     
     func retrieveSearchResults(_ artistID: String) {
-        
-        //TODO:- Add logic to stop this.
-        
+                
         if shouldFetchMoreData == false {
             return
         }

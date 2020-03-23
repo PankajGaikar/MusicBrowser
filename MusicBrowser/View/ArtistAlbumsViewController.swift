@@ -107,7 +107,6 @@ extension ArtistAlbumsViewController: UICollectionViewDelegate {
             }
         }
     }
-
     
     //Did select item
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -117,8 +116,9 @@ extension ArtistAlbumsViewController: UICollectionViewDelegate {
             return
         }
         
-        print("Album = \(album.title ?? "EMPTY?")")
-        //Show albums screen
+        let albumDetailsViewController = self.storyboard?.instantiateViewController(identifier: "AlbumDetailsViewController") as! AlbumDetailsViewController
+        albumDetailsViewController.album = album
+        self.navigationController?.pushViewController(albumDetailsViewController, animated: true)
     }
 }
 

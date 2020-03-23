@@ -17,9 +17,9 @@ struct Track: Codable, Hashable {
     let duration: Int?
     let rank: Int?
     let link: String?
-    let explicitLyrics: String?
-    let explicitContentLyrics: String?
-    let explicitContentCover: String?
+    let explicitLyrics: Bool?
+    let explicitContentLyrics: Int?
+    let explicitContentCover: Int?
     let preview: String?
     let artist: Artist?
     

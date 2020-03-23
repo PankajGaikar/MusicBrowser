@@ -24,7 +24,8 @@ struct Album: Codable, Hashable {
     let tracklist: String?
     let explicitLyrics: Bool?
     let type: String?
-
+    let trackDataSet: TrackDataSet?
+    
     enum CodingKeys: String, CodingKey {
         case id, title, link, cover, fans, tracklist, type
         case coverSmall = "cover_small"
@@ -35,6 +36,7 @@ struct Album: Codable, Hashable {
         case releaseDate = "release_date"
         case explicitLyrics = "explicit_lyrics"
         case recordType = "record_type"
+        case trackDataSet = "tracks"
     }
 }
 
