@@ -48,6 +48,4 @@ struct AlbumDataSet: Codable, Hashable  {
         case total, next
         case albums = "data"
     }
-    
 }
-

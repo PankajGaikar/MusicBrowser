@@ -10,6 +10,8 @@ import UIKit
 
 class AlbumDetailsViewController: UIViewController {
 
+    @IBOutlet weak var coverImage: UIImageView!
+    @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
 
