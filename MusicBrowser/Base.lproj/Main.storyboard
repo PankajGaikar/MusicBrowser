@@ -154,14 +154,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Rd3-yx-6Qe">
-                                <rect key="frame" x="0.0" y="44" width="414" height="414"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="Rd3-yx-6Qe" secondAttribute="height" multiplier="1:1" id="yhf-w6-OSO"/>
-                                </constraints>
-                            </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hNh-XM-qm4">
-                                <rect key="frame" x="0.0" y="458" width="414" height="404"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TrackTableViewCell" rowHeight="64" id="sPL-M4-Gf9" customClass="TrackTableViewCell" customModule="MusicBrowser" customModuleProvider="target">
@@ -213,29 +207,50 @@
                                             <outlet property="titleLabel" destination="4Jz-XR-N58" id="8Ju-W5-leg"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AlbumCoverTableViewCell" rowHeight="289" id="9vb-fb-IE6" customClass="AlbumCoverTableViewCell" customModule="MusicBrowser" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="92" width="414" height="289"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9vb-fb-IE6" id="u9B-F7-MiB">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="289"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wRr-fT-IAi">
+                                                    <rect key="frame" x="20" y="20" width="374" height="249"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="wRr-fT-IAi" secondAttribute="height" multiplier="1:1" id="yv6-7L-JyW"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="wRr-fT-IAi" secondAttribute="bottom" constant="20" symbolic="YES" id="5xr-58-hgH"/>
+                                                <constraint firstItem="wRr-fT-IAi" firstAttribute="top" secondItem="u9B-F7-MiB" secondAttribute="top" constant="20" symbolic="YES" id="Wk7-of-HwH"/>
+                                                <constraint firstAttribute="trailing" secondItem="wRr-fT-IAi" secondAttribute="trailing" constant="20" symbolic="YES" id="muC-4q-k4n"/>
+                                                <constraint firstItem="wRr-fT-IAi" firstAttribute="leading" secondItem="u9B-F7-MiB" secondAttribute="leading" constant="20" symbolic="YES" id="nNc-hR-CHs"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="coverImageView" destination="wRr-fT-IAi" id="FnV-FV-fjv"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </prototypes>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="iV2-3t-Zkz" firstAttribute="bottom" secondItem="hNh-XM-qm4" secondAttribute="bottom" id="5J0-ux-vYJ"/>
-                            <constraint firstItem="iV2-3t-Zkz" firstAttribute="trailing" secondItem="Rd3-yx-6Qe" secondAttribute="trailing" id="8Sj-ro-VGW"/>
-                            <constraint firstItem="Rd3-yx-6Qe" firstAttribute="leading" secondItem="iV2-3t-Zkz" secondAttribute="leading" id="YGx-Pa-TnP"/>
+                            <constraint firstItem="hNh-XM-qm4" firstAttribute="top" secondItem="iV2-3t-Zkz" secondAttribute="top" id="Nf7-YJ-aXA"/>
                             <constraint firstItem="hNh-XM-qm4" firstAttribute="leading" secondItem="iV2-3t-Zkz" secondAttribute="leading" id="fjB-ma-5bx"/>
-                            <constraint firstItem="hNh-XM-qm4" firstAttribute="top" secondItem="Rd3-yx-6Qe" secondAttribute="bottom" id="nh6-xf-Dke"/>
                             <constraint firstItem="iV2-3t-Zkz" firstAttribute="trailing" secondItem="hNh-XM-qm4" secondAttribute="trailing" id="olt-Rd-lck"/>
-                            <constraint firstItem="Rd3-yx-6Qe" firstAttribute="top" secondItem="iV2-3t-Zkz" secondAttribute="top" id="rR2-JG-NpI"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="iV2-3t-Zkz"/>
                     </view>
                     <connections>
-                        <outlet property="coverImage" destination="Rd3-yx-6Qe" id="9KZ-50-L8m"/>
                         <outlet property="tableView" destination="hNh-XM-qm4" id="B7u-Dw-q2I"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LPC-zL-bam" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2631.8840579710145" y="112.5"/>
+            <point key="canvasLocation" x="2630.434782608696" y="112.5"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="bkJ-RZ-hiL">

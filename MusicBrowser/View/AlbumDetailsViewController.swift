@@ -11,9 +11,7 @@ import Combine
 
 class AlbumDetailsViewController: UIViewController {
 
-    @IBOutlet weak var coverImage: UIImageView!
     @IBOutlet weak var tableView: UITableView!
-    
     var album: Album?
     
     //View Model responsible for populating data
@@ -25,18 +23,25 @@ class AlbumDetailsViewController: UIViewController {
 
     //Use Diffable datasource with section.
     fileprivate enum Section: CaseIterable {
+        case albumCover
         case main
     }
     
-    fileprivate var dataSource: UITableViewDiffableDataSource<Section, Track>!
-    
+    //Set datasource as diffable just to make sure it can have both Album and Track objects.
+    fileprivate var trackDataSource: UITableViewDiffableDataSource<Section, AnyHashable>!
+
     //MARK:- Lifecycle methods.
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupTableView()
-        setupAlbumCover()
+        if let albumName = album?.title {
+            self.navigationItem.title = albumName
+        }
         
+        //Setup delegate and datasource
+        setupTableView()
+        
+        //Setup subscriber.
         let _ = trackViewModel.trackData
             .receive(on: RunLoop.main)
             .sink { [weak self] (tracks) in
@@ -47,6 +52,8 @@ class AlbumDetailsViewController: UIViewController {
                 self.createSnapshot(tracks)
         }
         .store(in: &subscription)
+        
+        //Fetch data
         if let albumID = album?.id {
             trackViewModel.retrieveAlbumDetails(String(albumID))
         }
@@ -57,9 +64,6 @@ class AlbumDetailsViewController: UIViewController {
         setupDatasource()
     }
 
-    fileprivate func setupAlbumCover() {
-        coverImage.loadImageWithUrl(album?.coverXL ?? album?.coverBig ?? album?.coverMedium ?? "")
-    }
 }
 
 // MARK:- Diffable DataSource Setup & UITableView Delegate methods -
@@ -67,36 +71,46 @@ extension AlbumDetailsViewController: UITableViewDelegate {
     
     fileprivate func setupDatasource() {
         
-        dataSource = UITableViewDiffableDataSource<Section, Track>(tableView: tableView, cellProvider: { [weak self] (UITableView, indexPath, track) -> UITableViewCell? in
+        //Create datasource instance
+        trackDataSource = UITableViewDiffableDataSource<Section, AnyHashable>(tableView: tableView, cellProvider: { (tableView, indexPath, object) -> UITableViewCell? in
             
-            guard let `self` = self else {
-                return UITableViewCell()
-            }
-            
-            if let cell = self.tableView.dequeueReusableCell(withIdentifier: "TrackTableViewCell", for: indexPath) as? TrackTableViewCell {
-                cell.numberLabel.text = String(indexPath.row + 1)
-                cell.titleLabel?.text = track.title
-                if let duration = track.duration {
-                    cell.durationLabel.text = String(duration)
+            switch object {
+                //This is going to be album
+                case let object as Album:
+                    if let cell = self.tableView.dequeueReusableCell(withIdentifier: "AlbumCoverTableViewCell", for: indexPath) as? AlbumCoverTableViewCell {
+                        cell.coverImageView.loadImageWithUrl(object.coverXL ?? "")
+                        return cell
+                    }
+                    
+                //Setup tracks.
+                case let object as Track:
+                    if let cell = self.tableView.dequeueReusableCell(withIdentifier: "TrackTableViewCell", for: indexPath) as? TrackTableViewCell {
+                        cell.numberLabel.text = String(indexPath.row + 1)
+                        cell.titleLabel?.text = object.title
+                        if let duration = object.duration {
+                            cell.durationLabel.text = String(duration)
+                        }
+                        return cell
+                    }
+                default: break
                 }
-                return cell
-            }
+                return UITableViewCell()
             
-            return UITableViewCell()
         })
     }
     
     fileprivate func createSnapshot(_ tracks: [Track]) {
-        var snapshot = NSDiffableDataSourceSnapshot<Section, Track>()
-        snapshot.appendSections([.main])
-        snapshot.appendItems(tracks)
-        dataSource.apply(snapshot, animatingDifferences: true)
+        var trackSnapshot = NSDiffableDataSourceSnapshot<Section, AnyHashable>()
+        trackSnapshot.appendSections(Section.allCases)
+        trackSnapshot.appendItems([album!], toSection: .albumCover)
+        trackSnapshot.appendItems((tracks), toSection: .main)
+        trackDataSource.apply(trackSnapshot, animatingDifferences: true)
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //Deselect the row.
         tableView.deselectRow(at: indexPath, animated: true)
-        guard let track = dataSource.itemIdentifier(for: indexPath) else {
+        guard let track = trackDataSource.itemIdentifier(for: indexPath) else {
             return
         }
 
@@ -104,6 +118,12 @@ extension AlbumDetailsViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 64 //Hardcode? Dynamic would be great here I believe.
+        if indexPath.section == 0 {
+            return UIScreen.main.bounds.width
+        }
+        return 64 //Hardcode? Constant would be great here I believe.
     }
+
+
 }
+
