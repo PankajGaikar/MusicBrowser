@@ -22,6 +22,9 @@ struct Track: Codable, Hashable {
     let explicitContentCover: Int?
     let preview: String?
     let artist: Artist?
+    var durationInString: String {
+        return getDurationString(duration: duration ?? 0)
+    }
     
     enum CodingKeys: String, CodingKey {
         case id, readable, title, link, duration, rank, preview, artist
@@ -31,6 +34,12 @@ struct Track: Codable, Hashable {
         case explicitContentLyrics = "explicit_content_lyrics"
         case explicitContentCover = "explicit_content_cover"
     }
+}
+
+func getDurationString(duration: Int) -> String {
+    let minute = duration / 60 % 60
+    let second = duration % 60
+    return String(format: "%02i:%02i", minute, second)
 }
 
 struct TrackDataSet: Codable, Hashable  {

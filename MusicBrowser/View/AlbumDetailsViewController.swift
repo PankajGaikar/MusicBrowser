@@ -87,9 +87,7 @@ extension AlbumDetailsViewController: UITableViewDelegate {
                     if let cell = self.tableView.dequeueReusableCell(withIdentifier: "TrackTableViewCell", for: indexPath) as? TrackTableViewCell {
                         cell.numberLabel.text = String(indexPath.row + 1)
                         cell.titleLabel?.text = object.title
-                        if let duration = object.duration {
-                            cell.durationLabel.text = String(duration)
-                        }
+                        cell.durationLabel.text = object.durationInString ?? ""
                         return cell
                     }
                 default: break
